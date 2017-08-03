@@ -23,9 +23,15 @@ class BooksApp extends React.Component {
     });
   }
 
-  handleChange(e) {
-    console.log(e.target.value);
-  }
+  changeShelf = (e, filteredBook) => {
+    const books = this.state.books;
+    filteredBook.shelf = e.target.value;
+
+    // update state
+    this.setState({
+      books
+    });
+  };
 
   render() {
     return (
@@ -36,7 +42,7 @@ class BooksApp extends React.Component {
           render={() => (
             <ListBooks
               books={this.state.books}
-              onStatusChange={this.handleChange}
+              changeShelf={this.changeShelf}
             />
           )}
         />

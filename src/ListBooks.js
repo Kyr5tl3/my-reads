@@ -5,7 +5,7 @@ class ListBooks extends Component {
   state = {};
 
   render() {
-    const { books } = this.props;
+    const { books, changeShelf } = this.props;
     const currentlyReading = books.filter(
       book => book.shelf === "currentlyReading"
     );
@@ -24,16 +24,24 @@ class ListBooks extends Component {
               {currentlyReading.length > 0 &&
                 <Book
                   filteredBooks={currentlyReading}
-                  onStatusChange={this.props.onStatusChange}
+                  changeShelf={this.props.changeShelf}
                 />}
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
-              {wantToRead.length > 0 && <Book filteredBooks={wantToRead} />}
+              {wantToRead.length > 0 &&
+                <Book
+                  filteredBooks={wantToRead}
+                  changeShelf={this.props.changeShelf}
+                />}
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
-              {read.length > 0 && <Book filteredBooks={read} />}
+              {read.length > 0 &&
+                <Book
+                  filteredBooks={read}
+                  changeShelf={this.props.changeShelf}
+                />}
             </div>
           </div>
         </div>

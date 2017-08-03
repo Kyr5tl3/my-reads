@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Book extends Component {
   render() {
-    const { filteredBooks } = this.props;
+    const { filteredBooks, changeShelf } = this.props;
 
     return (
       <div className="bookshelf-books">
@@ -22,7 +22,8 @@ class Book extends Component {
                   <div className="book-shelf-changer">
                     <select
                       name="shelf"
-                      onChange={e => this.props.onStatusChange(e)}
+                      onChange={e => this.props.changeShelf(e, filteredBook)}
+                      value={filteredBook.shelf}
                     >
                       <option value="none" disabled>
                         Move to...
