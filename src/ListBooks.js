@@ -22,7 +22,10 @@ class ListBooks extends Component {
             <div className="bookshelf">
               <h2 className="bookshelf-title">Currently Reading</h2>
               {currentlyReading.length > 0 &&
-                <Book filteredBooks={currentlyReading} />}
+                <Book
+                  filteredBooks={currentlyReading}
+                  onStatusChange={this.props.onStatusChange}
+                />}
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>

@@ -23,13 +23,22 @@ class BooksApp extends React.Component {
     });
   }
 
+  handleChange(e) {
+    console.log(e.target.value);
+  }
+
   render() {
     return (
       <div className="app">
         <Route
           exact
           path="/"
-          render={() => <ListBooks books={this.state.books} />}
+          render={() => (
+            <ListBooks
+              books={this.state.books}
+              onStatusChange={this.handleChange}
+            />
+          )}
         />
         <Route path="/search" render={() => <SearchBooks />} />
       </div>

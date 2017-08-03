@@ -20,7 +20,10 @@ class Book extends Component {
                     }}
                   />
                   <div className="book-shelf-changer">
-                    <select>
+                    <select
+                      name="shelf"
+                      onChange={e => this.props.onStatusChange(e)}
+                    >
                       <option value="none" disabled>
                         Move to...
                       </option>
