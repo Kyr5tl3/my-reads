@@ -25,12 +25,13 @@ class BooksApp extends React.Component {
 
   changeShelf = (e, filteredBook) => {
     const books = this.state.books;
+    const shelf = e.target.value;
     filteredBook.shelf = e.target.value;
-
-    // update state
     this.setState({
       books
     });
+
+    BooksAPI.update(filteredBook, shelf);
   };
 
   render() {
