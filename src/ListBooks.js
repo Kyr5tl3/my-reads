@@ -5,7 +5,7 @@ class ListBooks extends Component {
   state = {};
 
   render() {
-    const { books, changeShelf } = this.props;
+    const { books } = this.props;
     const currentlyReading = books.filter(
       book => book.shelf === "currentlyReading"
     );
