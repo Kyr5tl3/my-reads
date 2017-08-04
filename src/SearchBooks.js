@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import escapeRegExp from "escape-string-regexp";
+import sortBy from "sort-by";
 import Book from "./Book";
 
 class SearchBooks extends Component {
@@ -15,7 +17,20 @@ class SearchBooks extends Component {
 
   render() {
     const { books } = this.props;
+    const { query } = this.state;
     const all = books;
+
+    let queryingBooks;
+    if (query) {
+      const match = new RegExp(escapeRegExp(query), "i");
+      queryingBooks = books.filter(filteredBook =>
+        match.test(filteredBook.title)
+      );
+    } else {
+      queryingBooks = books;
+    }
+
+    queryingBooks.sort(sortBy("title"));
 
     return (
       <div className="search-books">
@@ -43,7 +58,10 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           {all.length > 0 &&
-            <Book filteredBooks={all} changeShelf={this.props.changeShelf} />}
+            <Book
+              filteredBooks={queryingBooks}
+              changeShelf={this.props.changeShelf}
+            />}
         </div>
       </div>
     );
