@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Book from "./Book";
 
 class ListBooks extends Component {
@@ -46,9 +47,9 @@ class ListBooks extends Component {
           </div>
         </div>
         <div className="open-search">
-          <a onClick={() => this.setState({ showSearchPage: true })}>
+          <Link to="/search">
             Add a book
-          </a>
+          </Link>
         </div>
       </div>
     );
