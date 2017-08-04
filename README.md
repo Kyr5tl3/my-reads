@@ -7,8 +7,8 @@
 
 ## Server Setup
 - git clone https://github.com/udacity/reactnd-contacts-server.git
-- npm install
-- node server.js
+- `npm install`
+- `node server.js`
 
 ## Checklist
 
