@@ -1,15 +1,40 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import * as BooksAPI from "./BooksAPI";
 import escapeRegExp from "escape-string-regexp";
 import sortBy from "sort-by";
 import Book from "./Book";
 
 class SearchBooks extends Component {
   state = {
-    query: ""
+    query: "",
+    queriedBooks: []
   };
 
-  updateQuery = query => {
+  queryBooks = query => {
+    let queriedBooks = [];
+
+    if (query) {
+      let queryResults = [];
+
+      BooksAPI.search(query).then(results => {
+        if (results && results.length) {
+          queryResults = results;
+
+          this.setState({
+            queriedBooks: queryResults
+          });
+        } else {
+          this.setState({
+            queriedBooks: []
+          });
+        }
+      });
+    } else {
+      this.setState({
+        queriedBooks: []
+      });
+    }
     this.setState({
       query: query.trim()
     });
@@ -18,19 +43,6 @@ class SearchBooks extends Component {
   render() {
     const { books } = this.props;
     const { query } = this.state;
-    const all = books;
-
-    let queryingBooks;
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), "i");
-      queryingBooks = books.filter(filteredBook =>
-        match.test(filteredBook.title)
-      );
-    } else {
-      queryingBooks = books;
-    }
-
-    queryingBooks.sort(sortBy("title"));
 
     return (
       <div className="search-books">
@@ -49,7 +61,7 @@ class SearchBooks extends Component {
                                     you don't find a specific author or title. Every search is limited by search terms.
                                   */}
             <input
-              onChange={event => this.updateQuery(event.target.value)}
+              onChange={event => this.queryBooks(event.target.value)}
               placeholder="Search by title or author"
               type="text"
             />
@@ -57,9 +69,9 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {all.length > 0 &&
+          {this.state.queriedBooks.length > 0 &&
             <Book
-              filteredBooks={queryingBooks}
+              filteredBooks={this.state.queriedBooks}
               changeShelf={this.props.changeShelf}
             />}
         </div>
