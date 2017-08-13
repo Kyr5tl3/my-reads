@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
-import escapeRegExp from "escape-string-regexp";
-import sortBy from "sort-by";
 import Book from "./Book";
 
 class SearchBooks extends Component {
