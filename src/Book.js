@@ -15,8 +15,6 @@ class Book extends Component {
                     <div
                       className="book-cover"
                       style={{
-                        width: 128,
-                        height: 193,
                         backgroundImage: `url(${filteredBook.imageLinks.thumbnail})`
                       }}
                     />
@@ -44,7 +42,9 @@ class Book extends Component {
                     {filteredBook.title}
                   </div>
                   <div className="book-authors">
-                    {filteredBook.authors.join(", ")}
+                    {filteredBook.authors
+                      ? filteredBook.authors.join(", ")
+                      : ""}
                   </div>
                 </div>
               </li>
