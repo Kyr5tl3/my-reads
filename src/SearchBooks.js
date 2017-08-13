@@ -17,8 +17,10 @@ class SearchBooks extends Component {
 
       BooksAPI.search(query).then(results => {
         if (results && results.length) {
-          queryResults = results;
-
+          queryResults = results.map(result => {
+            result.shelf = this.addShelf(result);
+            return result;
+          });
           this.setState({
             queriedBooks: queryResults
           });
@@ -37,6 +39,11 @@ class SearchBooks extends Component {
       query: query.trim()
     });
   };
+
+  addShelf(result) {
+    let hasShelf = this.props.books.filter(book => book.id === result.id);
+    return hasShelf.length ? hasShelf[0].shelf : "none";
+  }
 
   render() {
     const { books } = this.props;
