@@ -46,9 +46,6 @@ class SearchBooks extends Component {
   }
 
   render() {
-    const { books } = this.props;
-    const { query } = this.state;
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
